@@ -17,8 +17,8 @@ class Preferred extends Component {
   //   this.props.history.push('amenities/amenity-detail');
   // };
 
-  handleClick = () => {
-    // this.props.handleAnemityClickedProps(item);
+  handleClick = item => {
+    this.props.handlePreferredClickedProps(item);
     this.props.history.push(`${this.props.match.path}/preferred-detail`);
   };
 

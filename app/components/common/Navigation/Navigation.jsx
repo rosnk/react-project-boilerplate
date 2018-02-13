@@ -14,6 +14,7 @@ import TopNavBar from '../TopNavBar/TopNavBar';
 import AmenityDetail from '../../AmenityDetail/AmenityDetail';
 import PreferredDetail from '../../PreferredDetail/PreferredDetail';
 import ExploreDetail from '../../ExploreDetail/ExploreDetail';
+import ExploreDetailList from '../../ExploreDetailList/ExploreDetailList';
 
 class Navigation extends Component {
   constructor(props) {
@@ -23,9 +24,10 @@ class Navigation extends Component {
     this.state = {
       isOpen: false,
       current_url: '',
-      amenity_item_for_detail_page: ''
-      // preferred_item_for_detail_page: '',
-      // explore_item_for_detail_page: ''
+      amenity_item_for_detail_page: '',
+      preferred_item_for_detail_page: '',
+      explore_item_for_detail_page: '',
+      explore_item_for_detail_list_page: ''
     };
   }
 
@@ -48,13 +50,17 @@ class Navigation extends Component {
     this.setState({ amenity_item_for_detail_page: item });
   };
 
-  // handlePreferredClickedProps = item => {
-  //   this.setState({ preferred_item_for_detail_page: item });
-  // };
+  handlePreferredClickedProps = item => {
+    this.setState({ preferred_item_for_detail_page: item });
+  };
 
-  // handleExploreClickedProps = item => {
-  //   this.setState({ explore_item_for_detail_page: item });
-  // };
+  handleExploreClickedProps = item => {
+    this.setState({ explore_item_for_detail_page: item });
+  };
+
+  handleExploreDetailClickedProps = item => {
+    this.setState({ explore_item_for_detail_list_page: item });
+  };
 
   render() {
     const urlName = (() => {
@@ -118,7 +124,6 @@ class Navigation extends Component {
                   path={`${this.props.match.path}/home`}
                   render={() => <Home getCurrentUrl={this.getCurrentUrl} />}
                 />
-
                 <Route
                   exact
                   path={`${this.props.match.path}/amenities/amenity-detail`}
@@ -131,25 +136,31 @@ class Navigation extends Component {
                     />
                   )}
                 />
-
                 <Route
                   exact
                   path={`${this.props.match.path}/amenities`}
-                  render={history => (
+                  render={props => (
                     <Amenities
                       getCurrentUrl={this.getCurrentUrl}
-                      router_props={history}
+                      {...props}
                       handleAnemityClickedProps={this.handleAnemityClickedProps}
                     />
                   )}
                 />
-
                 <Route
                   exact
                   path={`${this.props.match.path}/preferred/preferred-detail`}
-                  render={props => <PreferredDetail {...props} />}
+                  render={props => (
+                    <PreferredDetail
+                      {...props}
+                      preferredItem={
+                        this.state.preferred_item_for_detail_page !== ''
+                          ? this.state.preferred_item_for_detail_page
+                          : ''
+                      }
+                    />
+                  )}
                 />
-
                 <Route
                   path={`${this.props.match.path}/preferred`}
                   render={props => (
@@ -163,10 +174,32 @@ class Navigation extends Component {
 
                 <Route
                   exact
-                  path={`${this.props.match.path}/explore/explore-detail`}
-                  render={props => <ExploreDetail {...props} />}
+                  path={`${this.props.match.path}/explore/explore-detail/explore-detail-list`}
+                  render={props => (
+                    <ExploreDetailList
+                      {...props}
+                      expoDetailListItem={
+                        this.state.explore_item_for_detail_list_page !== ''
+                          ? this.state.explore_item_for_detail_list_page
+                          : ''
+                      }
+                    />
+                  )}
                 />
 
+                <Route
+                  exact
+                  path={`${this.props.match.path}/explore/explore-detail`}
+                  render={props => (
+                    <ExploreDetail
+                      {...props}
+                      expoItem={
+                        this.state.explore_item_for_detail_page !== '' ? this.state.explore_item_for_detail_page : ''
+                      }
+                      handleExploreDetailClickedProps={this.handleExploreDetailClickedProps}
+                    />
+                  )}
+                />
                 <Route
                   path={`${this.props.match.path}/explore`}
                   render={props => (

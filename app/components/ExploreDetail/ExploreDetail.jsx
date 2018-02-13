@@ -4,10 +4,38 @@ import React from 'react';
 // import Slider from '../Slider/Slider';
 import './css/explore-detail.scss';
 
-const ExploreDetail = () => (
-  <div className="explore-detail">
-    This is explore detail page
-    {/* <Slider sliders={props.amenity.amenity_sliders} />
+// const handleClick = props => {
+//   debugger; // eslint-disable-line
+// };
+
+const ExploreDetail = props => {
+  const handleClick = item => {
+    props.handleExploreDetailClickedProps(item);
+    props.history.push(`${props.match.path}/explore-detail-list`);
+  };
+
+  return (
+    <div className="explore-detail">
+      {props.expoItem[0].map(item => (
+        <div role="presentation" className="card" key={item.id} onClick={() => handleClick(item)}>
+          <div className="row">
+            <div className="col-4">
+              <div className="image_wrapper">
+                <img className="card-img-top" src={item.image} alt="" />
+              </div>
+            </div>
+
+            <div className="col-8">
+              <div className="card-body">
+                <h5 className="card-title">{item.title}</h5>
+                <p className="card-text">{item.address}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+
+      {/* <Slider sliders={props.amenity.amenity_sliders} />
 
     <div className="amenity_header_wrapper">
       <div className="amenity_title">
@@ -31,7 +59,8 @@ const ExploreDetail = () => (
     </div>
 
 <div className="text-description">{props.amenity.description}</div> */}
-  </div>
-);
+    </div>
+  );
+};
 
 export default ExploreDetail;

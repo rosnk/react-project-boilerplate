@@ -15,7 +15,7 @@ class Amenities extends Component {
 
   handleClick = item => {
     this.props.handleAnemityClickedProps(item);
-    this.props.router_props.history.push(`${this.props.router_props.match.path}/amenity-detail`);
+    this.props.history.push(`${this.props.match.path}/amenity-detail`);
   };
 
   render() {
