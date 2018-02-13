@@ -1,0 +1,169 @@
+import types from '../constants/actionTypes';
+
+const initialState = {
+  hotel: {},
+  hotels: [],
+  amenities: [],
+  preferred: [],
+  exploreCategories: [],
+  exploreAdvertisements: [],
+  currentLocation: {},
+  isFetching: false,
+  error: false,
+  isFetchingAmenities: false,
+  errorAmenities: false,
+  isFetchingPreferred: false,
+  isFetchingExplore: false,
+  errorPreferred: false,
+  errorExplore: false,
+  isFetchingHotels: false,
+  errorHotels: false,
+  showLoader: true
+};
+
+function hotelReducer(state = initialState, action) {
+  switch (action.type) {
+    case types.SET_CURRENT_LOCATION:
+      return {
+        ...state,
+        currentLocation: action.data
+      };
+    case types.FETCHING_HOTEL:
+      return {
+        ...state,
+        isFetching: true,
+        hotel: {}
+      };
+    case types.FETCHING_HOTEL_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        showLoader: false,
+        hotel: action.data
+      };
+    case types.FETCHING_HOTEL_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: true
+      };
+
+    case types.FETCHING_SEACH_RESULT_HOTEL:
+      return {
+        ...state,
+        isFetching: true,
+        hotel: {}
+      };
+    case types.FETCHING_SEACH_RESULT_HOTEL_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        hotels: action.data
+      };
+    case types.FETCHING_SEACH_RESULT_HOTEL_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: true
+      };
+
+    case types.FETCHING_SEACH_RESULT_BY_KEYWORD_HOTEL_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        hotels: action.data
+      };
+    case types.FETCHING_SEACH_RESULT_BY_KEYWORD_HOTEL_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: true
+      };
+    case types.SET_HOTEL:
+      return {
+        ...state,
+        isFetching: false,
+        hotel: action.data
+      };
+    case types.FETCHING_AMENITIES:
+      return {
+        ...state,
+        isFetchingAmenities: true,
+        amenities: []
+      };
+    case types.FETCHING_AMENITIES_SUCCESS:
+      return {
+        ...state,
+        isFetchingAmenities: false,
+        amenities: action.data
+      };
+    case types.FETCHING_AMENITIES_FAILURE:
+      return {
+        ...state,
+        isFetchingAmenities: false,
+        error: true
+      };
+
+    case types.FETCHING_PREFERRED:
+      return {
+        ...state,
+        isFetchingExplore: true,
+        preferred: []
+      };
+    case types.FETCHING_PREFERRED_SUCCESS:
+      return {
+        ...state,
+        isFetchingExplore: false,
+        preferred: action.data
+      };
+    case types.FETCHING_PREFERRED_FAILURE:
+      return {
+        ...state,
+        isFetchingExplore: false,
+        errorExplore: true
+      };
+
+    case types.FETCHING_EXPLORE:
+      return {
+        ...state,
+        isFetchingPreferred: true,
+        explore: []
+      };
+    case types.FETCHING_EXPLORE_SUCCESS:
+      return {
+        ...state,
+        isFetchingPreferred: false,
+        exploreCategories: action.data.categories,
+        exploreAdvertisements: action.data.advertisements
+      };
+    case types.FETCHING_EXPLORE_FAILURE:
+      return {
+        ...state,
+        isFetchingPreferred: false,
+        errorPreferred: true
+      };
+    // case types.FETCHING_HOTEL_NEAR:
+    //     return {
+    //         ...state,
+    //         isFetchingHotels: true,
+    //         hotels: []
+    //     };
+    // case types.FETCHING_HOTEL_NEAR_SUCCESS:
+    //     return {
+    //         ...state,
+    //         isFetchingHotels: false,
+    //         hotels: action.data
+    //     };
+    // case types.FETCHING_HOTEL_NEAR_FAILURE:
+    //     return {
+    //         ...state,
+    //         isFetchingHotels: false,
+    //         errorHotels: true
+    //     };
+
+    default:
+      return state;
+  }
+}
+
+export default hotelReducer;

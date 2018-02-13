@@ -1,0 +1,55 @@
+.amenities {
+  height: 100%;
+  padding-bottom: 72px;
+  overflow-y: scroll;
+
+  .amenity_wrapper {
+    position: relative;
+    border-top: 2px solid #ffffff;
+    cursor: pointer;
+
+    .image_wrapper:before {
+      content: '';
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    p {
+      position: absolute;
+      bottom: 0;
+      left: 20px;
+      text-transform: uppercase;
+      color: #ffffff;
+      font-size: 1.5em;
+      z-index: 2;
+    }
+  }
+}
+
+@media (min-width: 30em) {
+}
+
+@media (min-width: 48em) {
+  .amenities {
+    .amenity_wrapper {
+      p {
+        font-size: 2em;
+      }
+    }
+  }
+}
+
+@media (min-width: 62em) {
+  .amenities {
+    .amenity_wrapper {
+      p {
+        font-size: 2.5em;
+      }
+    }
+  }
+}

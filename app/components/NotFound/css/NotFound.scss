@@ -1,0 +1,23 @@
+.not_found_page {
+  padding-top: 190px;
+
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+
+  .not-found-text-wrapper {
+    // border: 1px solid red;
+
+    padding: 15px;
+    h3,
+    p {
+      color: #16a4c3;
+      text-align: center;
+    }
+  }
+}
+
+#compb {
+  background-color: url(../images/b.jpg);
+}

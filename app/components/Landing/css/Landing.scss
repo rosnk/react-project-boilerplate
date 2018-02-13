@@ -1,0 +1,50 @@
+
+.jumbotron{
+    background: #000000 url('../images/landing_background.png') no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 0;
+    border-radius: 0;
+
+    .logo{
+        margin-top: 90px;
+        margin-bottom: 40px;
+        width: 200px;
+        display: inline-block;
+        text-align: center;
+        
+    }
+
+    .banner_content{
+        div{
+            margin-bottom: 90px;
+            p{
+                color: #ffffff;
+                font-size: 1.25em;
+            }
+
+            input{
+                border-radius: 2px;
+            }
+        }
+    }
+
+    .custom_button{
+        position:  absolute;
+        bottom: 10px;
+        right: 10px;
+        border: 1px solid #ffffff;
+        border-radius: 3px;
+        padding: 15px;
+        background-color: rgba(0,0,0,0);
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 1.25em;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
+}

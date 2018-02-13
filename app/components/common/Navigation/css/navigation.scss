@@ -1,0 +1,115 @@
+.navbar-nav {
+  // background-color: red;
+  a {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    color: #000000;
+    opacity: 0.6;
+    text-decoration: none;
+    font-weight: bold;
+  }
+}
+
+.banner_logo {
+  img {
+    width: 60%;
+  }
+}
+
+.collapse {
+  // -webkit-transition: all 0.5s ease;
+  // -moz-transition: all 0.5s ease;
+  // -o-transition: all 0.5s ease;
+  margin-left: -250px;
+}
+
+.navbar-collapse {
+  margin-left: 0px;
+  transition: left 0.5s ease;
+  z-index: 1000;
+  position: fixed;
+  width: 250px;
+  height: 100%;
+  overflow-y: auto;
+
+  background-color: #ffffff;
+  // left: 250px;
+  // left: 0px;
+}
+
+.page-content-wrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  padding-left: 0;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+
+  // & > div:first-child {
+  //   height: 8.95%;
+  // }
+
+  // & > div:nth-child(2) {
+  //   height: 91.05%;
+  // }
+
+  nav {
+    padding: 1.5rem 1rem;
+  }
+
+  .content_wrapper {
+    background-color: yellow;
+    height: 100%;
+  }
+
+  &.other_tabs .content_wrapper {
+    padding-top: 5.5em;
+  }
+}
+
+.navbar-collapse.show + div#page-content-wrapper {
+  position: absolute;
+  padding-left: 250px;
+}
+
+.tab-links {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #ffffff;
+  margin: 0;
+  z-index: 3;
+
+  a {
+    display: inline-block;
+    padding: 10px;
+    color: #000000;
+    text-decoration: none;
+
+    .fa {
+      display: block;
+    }
+
+    &.active {
+      color: #20a6c4;
+    }
+  }
+
+  ul.nav {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #ffffff;
+  }
+}
+
+@media (min-width: 30em) {
+}
+
+@media (min-width: 48em) {
+}
+
+@media (min-width: 62em) {
+}
