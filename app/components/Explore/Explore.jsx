@@ -10,9 +10,9 @@ class Explore extends Component {
     this.props.fetchExploreAdsFromAPI(this.props.hotel, this.props.location);
   }
 
-  handleClick = category => {
-    console.log(category);
-    // this.props.history.push('amenities/amenity-detail');
+  handleClick = () => {
+    // console.log(category);
+    this.props.history.push(`${this.props.match.path}/explore-detail`);
   };
 
   render() {

@@ -12,6 +12,8 @@ import Preferred from '../../Preferred/Preferred';
 import Explore from '../../Explore/Explore';
 import TopNavBar from '../TopNavBar/TopNavBar';
 import AmenityDetail from '../../AmenityDetail/AmenityDetail';
+import PreferredDetail from '../../PreferredDetail/PreferredDetail';
+import ExploreDetail from '../../ExploreDetail/ExploreDetail';
 
 class Navigation extends Component {
   constructor(props) {
@@ -20,7 +22,10 @@ class Navigation extends Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       isOpen: false,
-      current_url: ''
+      current_url: '',
+      amenity_item_for_detail_page: ''
+      // preferred_item_for_detail_page: '',
+      // explore_item_for_detail_page: ''
     };
   }
 
@@ -38,6 +43,18 @@ class Navigation extends Component {
   handleSearch = () => {
     this.props.history.push('/search');
   };
+
+  handleAnemityClickedProps = item => {
+    this.setState({ amenity_item_for_detail_page: item });
+  };
+
+  // handlePreferredClickedProps = item => {
+  //   this.setState({ preferred_item_for_detail_page: item });
+  // };
+
+  // handleExploreClickedProps = item => {
+  //   this.setState({ explore_item_for_detail_page: item });
+  // };
 
   render() {
     const urlName = (() => {
@@ -105,22 +122,60 @@ class Navigation extends Component {
                 <Route
                   exact
                   path={`${this.props.match.path}/amenities/amenity-detail`}
-                  render={() => <AmenityDetail />}
+                  render={props => (
+                    <AmenityDetail
+                      {...props}
+                      amenity={
+                        this.state.amenity_item_for_detail_page !== '' ? this.state.amenity_item_for_detail_page : ''
+                      }
+                    />
+                  )}
                 />
 
                 <Route
                   exact
                   path={`${this.props.match.path}/amenities`}
-                  render={history => <Amenities getCurrentUrl={this.getCurrentUrl} router_props={history} />}
+                  render={history => (
+                    <Amenities
+                      getCurrentUrl={this.getCurrentUrl}
+                      router_props={history}
+                      handleAnemityClickedProps={this.handleAnemityClickedProps}
+                    />
+                  )}
+                />
+
+                <Route
+                  exact
+                  path={`${this.props.match.path}/preferred/preferred-detail`}
+                  render={props => <PreferredDetail {...props} />}
                 />
 
                 <Route
                   path={`${this.props.match.path}/preferred`}
-                  render={() => <Preferred getCurrentUrl={this.getCurrentUrl} />}
+                  render={props => (
+                    <Preferred
+                      {...props}
+                      getCurrentUrl={this.getCurrentUrl}
+                      handlePreferredClickedProps={this.handlePreferredClickedProps}
+                    />
+                  )}
                 />
+
+                <Route
+                  exact
+                  path={`${this.props.match.path}/explore/explore-detail`}
+                  render={props => <ExploreDetail {...props} />}
+                />
+
                 <Route
                   path={`${this.props.match.path}/explore`}
-                  render={() => <Explore getCurrentUrl={this.getCurrentUrl} />}
+                  render={props => (
+                    <Explore
+                      {...props}
+                      getCurrentUrl={this.getCurrentUrl}
+                      handleExploreClickedProps={this.handleExploreClickedProps}
+                    />
+                  )}
                 />
               </Switch>
               <div className="tab-links">

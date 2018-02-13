@@ -1,12 +1,13 @@
 /* eslint react/prop-types: 0 */
 import React from 'react';
-import { Link } from 'react-router-dom';
-import Slider from '../Slider/Slider';
-import './css/amenity-detail.scss';
+// import { Link } from 'react-router-dom';
+// import Slider from '../Slider/Slider';
+import './css/preferred-detail.scss';
 
-const AmenityDetail = props => (
-  <div className="amenity-detail">
-    <Slider sliders={props.amenity.amenity_sliders} />
+const PreferredDetail = () => (
+  <div className="preferred-detail">
+    This is Preferred detail page
+    {/* <Slider sliders={props.amenity.amenity_sliders} />
 
     <div className="amenity_header_wrapper">
       <div className="amenity_title">
@@ -29,8 +30,8 @@ const AmenityDetail = props => (
       </div>
     </div>
 
-    <div className="text-description">{props.amenity.description}</div>
+<div className="text-description">{props.amenity.description}</div> */}
   </div>
 );
 
-export default AmenityDetail;
+export default PreferredDetail;

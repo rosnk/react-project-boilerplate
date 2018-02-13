@@ -13,7 +13,8 @@ class Amenities extends Component {
     this.props.fetchAmenitiesFromAPI(this.props.hotel);
   }
 
-  handleClick = () => {
+  handleClick = item => {
+    this.props.handleAnemityClickedProps(item);
     this.props.router_props.history.push(`${this.props.router_props.match.path}/amenity-detail`);
   };
 
@@ -21,7 +22,8 @@ class Amenities extends Component {
     return (
       <div className="amenities">
         {this.props.amenities.map(item => (
-          <div role="presentation" onClick={() => this.handleClick()} className="amenity_wrapper" key={item.id}>
+          <div role="presentation" onClick={() => this.handleClick(item)} className="amenity_wrapper" key={item.id}>
+            {console.log(item)}
             <div className="image_wrapper">
               <img src={item.cover_image} className="img-fluid" alt="" />
             </div>

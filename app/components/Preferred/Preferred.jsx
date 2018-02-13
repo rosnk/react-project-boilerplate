@@ -17,12 +17,17 @@ class Preferred extends Component {
   //   this.props.history.push('amenities/amenity-detail');
   // };
 
+  handleClick = () => {
+    // this.props.handleAnemityClickedProps(item);
+    this.props.history.push(`${this.props.match.path}/preferred-detail`);
+  };
+
   render() {
     console.log(this.props.preferred);
     return (
       <div className="preferred">
         {this.props.preferred.map(item => (
-          <div className="card" key={item.id}>
+          <div role="presentation" className="card" key={item.id} onClick={() => this.handleClick(item)}>
             <div className="row">
               <div className="col-4">
                 <div className="image_wrapper">
