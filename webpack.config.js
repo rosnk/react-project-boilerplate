@@ -14,7 +14,9 @@ const config = {
   devServer: {
     hot: true,
     publicPath: '/public/',
-    historyApiFallback: true
+    historyApiFallback: true,
+    compress: true,
+    disableHostCheck: true
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
