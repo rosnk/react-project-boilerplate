@@ -1,5 +1,4 @@
 nav.navbar {
-  background-color: red;
   position: absolute;
   width: 100%;
   z-index: 50;
@@ -17,6 +16,7 @@ nav.navbar {
       left: 50%;
       -webkit-transform: translateX(-50%);
       transform: translateX(-50%);
+      color: #16a4c3;
     }
   }
 }
@@ -32,6 +32,13 @@ nav.navbar {
 
   i.fa-search {
     color: rgba(255, 255, 255, 1);
+  }
+}
+
+.navbar-light {
+  .fa-search,
+  .navbar-brand {
+    color: #16a4c3;
   }
 }
 
