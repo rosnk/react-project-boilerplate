@@ -1,6 +1,7 @@
 /* eslint react/prop-types: 0 */
 import React from 'react';
 import { Link } from 'react-router-dom';
+import renderHTML from 'react-render-html';
 import TabSlider from '../TabSlider/TabSlider';
 import './css/explore-detail-list.scss';
 
@@ -69,7 +70,7 @@ const ExploreDetailList = props => {
       </div>
 
       {props.expoDetailListItem.description !== '' ? (
-        <div className="text-description">{props.expoDetailListItem.description}</div>
+        <div className="text-description">{renderHTML(props.expoDetailListItem.description)}</div>
       ) : null}
 
       <div className="google_map">

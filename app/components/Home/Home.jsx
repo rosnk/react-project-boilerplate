@@ -1,6 +1,7 @@
 /* eslint react/prop-types: 0 */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import './css/home.scss';
 
 import Slider from '../Slider/Slider';
@@ -15,7 +16,10 @@ class Home extends Component {
       <div className="home_page">
         <Slider sliders={this.props.hotel.sliders} />
         <div className="icons">
-          <i className="fa fa-facebook fa-2x" aria-hidden="true" />
+          <Link to={this.props.hotel.facebook} target="_blank">
+            <i className="fa fa-facebook fa-2x" aria-hidden="true" />
+          </Link>
+
           <i className="fa fa-arrows-alt fa-2x" aria-hidden="true" />
         </div>
       </div>

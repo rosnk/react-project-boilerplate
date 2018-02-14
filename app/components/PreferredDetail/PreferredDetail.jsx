@@ -1,6 +1,7 @@
 /* eslint react/prop-types: 0 */
 import React from 'react';
 import { Link } from 'react-router-dom';
+import renderHTML from 'react-render-html';
 import TabSlider from '../TabSlider/TabSlider';
 import './css/preferred-detail.scss';
 
@@ -68,7 +69,7 @@ const PreferredDetail = props => {
       </div>
 
       {props.preferredItem.description !== '' ? (
-        <div className="text-description">{props.preferredItem.description}</div>
+        <div className="text-description">{renderHTML(props.preferredItem.description)}</div>
       ) : null}
 
       <div className="google_map">

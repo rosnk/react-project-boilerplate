@@ -1,6 +1,7 @@
 /* eslint react/prop-types: 0 */
 import React from 'react';
 import { Link } from 'react-router-dom';
+import renderHTML from 'react-render-html';
 import Slider from '../Slider/Slider';
 import './css/amenity-detail.scss';
 
@@ -29,7 +30,7 @@ const AmenityDetail = props => (
       </div>
     </div>
 
-    <div className="text-description">{props.amenity.description}</div>
+    <div className="text-description">{renderHTML(props.amenity.description)}</div>
   </div>
 );
 

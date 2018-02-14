@@ -22,34 +22,30 @@ class Landing extends Component {
   }
 
   getLocationAsync = () => {
-    /* remove this code once complete */
-    const location = {
-      latitude: 85.2690446,
-      longitude: 27.686867399999997
+    /* Only for dev :: remove this code once complete */
+    // const location = {
+    //   latitude: 85.2690446,
+    //   longitude: 27.686867399999997
+    // };
+    // this.props.setCurrentLocation(location);
+    // this.props.fetchHotelFromAPI(location);
+    /* Only for dev :: remove till here */
+
+    const success = pos => {
+      const crd = pos.coords;
+      const location = {
+        latitude: crd.latitude,
+        longitude: crd.longitude
+      };
+      this.props.setCurrentLocation(location);
+      this.props.fetchHotelFromAPI(location);
     };
 
-    this.props.setCurrentLocation(location);
-    this.props.fetchHotelFromAPI(location);
-
-    /* remove till here */
-
-    // const success = pos => {
-    //   const crd = pos.coords;
-
-    //   const location = {
-    //     latitude: crd.latitude,
-    //     longitude: crd.longitude
-    //   };
-
-    //   this.props.setCurrentLocation(location);
-    //   this.props.fetchHotelFromAPI(location);
-    // };
-
-    // if ('geolocation' in navigator) {
-    //   navigator.geolocation.getCurrentPosition(success);
-    // } else {
-    //   this.setState({ errorMessage: 'Location service not available.' });
-    // }
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(success);
+    } else {
+      this.setState({ errorMessage: 'Location service not available.' });
+    }
   };
 
   handleSearch = () => {
@@ -68,12 +64,6 @@ class Landing extends Component {
               <img src={logo} alt="logo" className="logo" />
               <div>
                 <p>Search for Hotels and Resorts</p>
-
-                <h1>
-                  props: {this.props.currentLocation.longitude}
-                  lat:
-                  {this.props.currentLocation.latitude}
-                </h1>
                 <Input
                   type="text"
                   name="search"
