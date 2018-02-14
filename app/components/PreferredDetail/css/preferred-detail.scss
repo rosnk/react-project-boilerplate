@@ -2,6 +2,60 @@
   height: 100%;
   padding-bottom: 72px;
   overflow-y: scroll;
+
+  .preferred_header_wrapper {
+    background-color: #16a4c3;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+
+    .preferred_title {
+      h4 {
+        color: #ffffff;
+        padding: 10px;
+      }
+
+      .social_icons_wrapper {
+        a {
+          color: #ffffff;
+          margin-left: 10px;
+          margin-right: 10px;
+        }
+        i {
+          font-size: 29px;
+          border: 1px solid #ffffff;
+          padding: 8px;
+          display: inline-block;
+          width: 45px;
+          height: 45px;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+
+  .text-description {
+    padding: 20px;
+  }
+
+  .google_map {
+    position: relative;
+
+    img {
+      width: 100%;
+    }
+
+    button {
+      position: absolute;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      border-radius: 0;
+      background-color: #16a4c3;
+      border-color: #ffffff;
+    }
+  }
 }
 
 @media (min-width: 30em) {

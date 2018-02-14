@@ -1,17 +1,19 @@
-.carousel,
-.carousel-inner,
-.carousel-item {
-  height: 100%;
-}
-
-.carousel {
-  img {
+.home_page {
+  .carousel,
+  .carousel-inner,
+  .carousel-item {
     height: 100%;
   }
 
-  .carousel-control-prev,
-  .carousel-control-next {
-    height: 90%;
+  .carousel {
+    img {
+      height: 100%;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+      height: 90%;
+    }
   }
 }
 

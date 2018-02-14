@@ -13,17 +13,17 @@ const AmenityDetail = props => (
         <h4>{props.amenity.title}</h4>
         <div className="social_icons_wrapper">
           <Link to={props.amenity.amenity_items[0].value} target="_blank">
-            <i className="fa fa-facebook fa-2x" aria-hidden="true" />
+            <i className="fa fa-facebook" aria-hidden="true" />
           </Link>
           <Link to={props.amenity.amenity_items[1].value} target="_blank">
-            <i className="fa fa-link fa-2x" aria-hidden="true" />
+            <i className="fa fa-link" aria-hidden="true" />
           </Link>
           <Link to={props.amenity.amenity_items[2].value} target="_blank">
-            <i className="fa fa-phone fa-2x" aria-hidden="true" />
+            <i className="fa fa-phone" aria-hidden="true" />
           </Link>
 
           <Link to={props.amenity.amenity_items[3].value} target="_blank">
-            <i className="fa fa-star fa-2x" aria-hidden="true" />
+            <i className="fa fa-star" aria-hidden="true" />
           </Link>
         </div>
       </div>
