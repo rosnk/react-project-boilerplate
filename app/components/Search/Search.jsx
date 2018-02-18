@@ -20,33 +20,51 @@ class Search extends Component {
     this.state = {
       address: ''
     };
-    this.onChange = address => this.setState({ address });
+    this.onChange = address => {
+      this.setState({ address });
+      if (address.length >= 3) {
+        this.props.searchHotelsFromKeyword(address);
+      }
+
+      geocodeByAddress(this.state.address)
+        .then(results => getLatLng(results[0]))
+        .then(latLng => {
+          const location = {
+            latitude: latLng.lat,
+            longitude: latLng.lng
+          };
+
+          this.props.setCurrentLocation(location);
+          this.props.searchHotelsFromAPI(location);
+        })
+
+        .catch(error => console.error('Error', error));
+    };
   }
 
-  handleFormSubmit = event => {
-    const address = event;
-    this.setState({ address });
+  // handleFormSubmit = event => {
+  //   alert('hellow');
+  //   const address = event;
+  //   this.setState({ address });
 
-    if (address.length >= 3) {
-      this.props.searchHotelsFromKeyword(address);
-    }
+  //   if (address.length >= 3) {
+  //     this.props.searchHotelsFromKeyword(address);
+  //   }
 
-    geocodeByAddress(this.state.address)
-      .then(results => getLatLng(results[0]))
-      .then(latLng => {
-        const location = {
-          latitude: latLng.lat,
-          longitude: latLng.lng
-        };
+  //   geocodeByAddress(this.state.address)
+  //     .then(results => getLatLng(results[0]))
+  //     .then(latLng => {
+  //       const location = {
+  //         latitude: latLng.lat,
+  //         longitude: latLng.lng
+  //       };
 
-        // this.setState({ location });
-        this.props.setCurrentLocation(location);
-        this.props.searchHotelsFromAPI(location);
-        // this.props.fetchHotelFromAPI(location);
-      })
-      // .then(latLng => console.log('Success', latLng))
-      .catch(error => console.error('Error', error));
-  };
+  //       this.props.setCurrentLocation(location);
+  //       this.props.searchHotelsFromAPI(location);
+  //     })
+
+  //     .catch(error => console.error('Error', error));
+  // };
 
   handleRowClick = hotel => {
     this.props.setHotel(hotel);
@@ -84,7 +102,7 @@ class Search extends Component {
         <div className="container">
           <div className="form">
             <form>
-              <PlacesAutocomplete inputProps={inputProps} onSelect={this.handleFormSubmit} />
+              <PlacesAutocomplete inputProps={inputProps} />
             </form>
           </div>
           {/* this.state.location != {} ? <HotelsNearList location={this.state.location} /> : null */}

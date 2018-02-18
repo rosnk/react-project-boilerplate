@@ -21,6 +21,7 @@ class Navigation extends Component {
     super(props);
 
     this.toggle = this.toggle.bind(this);
+    this.collapseHamburgerMenu = this.collapseHamburgerMenu.bind(this);
     this.state = {
       isOpen: false,
       current_url: '',
@@ -39,6 +40,12 @@ class Navigation extends Component {
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
+    });
+  }
+
+  collapseHamburgerMenu() {
+    this.setState({
+      isOpen: false
     });
   }
 
@@ -82,25 +89,30 @@ class Navigation extends Component {
     const otherTabCSS = urlName === 'home' ? '' : 'other_tabs';
 
     return (
-      <div>
-        <Collapse isOpen={this.state.isOpen} navbar>
-          <div className="banner_logo text-center">
-            <img src={this.props.hotel.logo_url} alt="" />
-          </div>
-          <Nav navbar className="text-center">
-            <a href="/app-home/home">Home</a>
-            <a href="/app-home/amenities">Amenities</a>
-            <a href="/app-home/preferred">Preferred</a>
-            <a href="/app-home/explore">Explore</a>
-          </Nav>
-        </Collapse>
+      <Router history={this.props.history}>
+        <div>
+          <Collapse isOpen={this.state.isOpen} navbar>
+            <div className="banner_logo text-center">
+              <img src={this.props.hotel.logo_url} alt="" />
+            </div>
+            <Nav navbar className="text-center">
+              <NavLink to="/app-home/home">Home</NavLink>
+              <NavLink to="/app-home/amenities">Amenities</NavLink>
+              <NavLink to="/app-home/preferred">Preferred</NavLink>
+              <NavLink to="/app-home/explore">Explore</NavLink>
+              {/* <a href="/app-home/home">Home</a>
+              <a href="/app-home/amenities">Amenities</a>
+              <a href="/app-home/preferred">Preferred</a>
+    <a href="/app-home/explore">Explore</a> */}
+            </Nav>
+          </Collapse>
 
-        <div id="page-content-wrapper" className={`page-content-wrapper ${otherTabCSS}`}>
-          <TopNavBar tabName={urlName} toggle={this.toggle} handleSearch={this.handleSearch} />
+          <div id="page-content-wrapper" className={`page-content-wrapper ${otherTabCSS}`}>
+            <TopNavBar tabName={urlName} toggle={this.toggle} handleSearch={this.handleSearch} />
 
-          {/* <h1>{this.state.current_url}</h1>
+            {/* <h1>{this.state.current_url}</h1>
     <p>{urlName}</p> */}
-          {/* <Navbar color="faded" light>
+            {/* <Navbar color="faded" light>
              
             <button onClick={this.toggle} type="button" className="mr-2 navbar-toggler">
               <span className="navbar-toggler-icon" />
@@ -112,7 +124,6 @@ class Navigation extends Component {
             <i className="fa fa-search" onCLick={this.handleSearch} />
           </Navbar> */}
 
-          <Router history={this.props.history}>
             <div className="content_wrapper">
               <Switch>
                 <Route
@@ -122,7 +133,9 @@ class Navigation extends Component {
                 />
                 <Route
                   path={`${this.props.match.path}/home`}
-                  render={() => <Home getCurrentUrl={this.getCurrentUrl} />}
+                  render={() => (
+                    <Home getCurrentUrl={this.getCurrentUrl} collapseHamburgerMenu={this.collapseHamburgerMenu} />
+                  )}
                 />
                 <Route
                   exact
@@ -144,6 +157,7 @@ class Navigation extends Component {
                       getCurrentUrl={this.getCurrentUrl}
                       {...props}
                       handleAnemityClickedProps={this.handleAnemityClickedProps}
+                      collapseHamburgerMenu={this.collapseHamburgerMenu}
                     />
                   )}
                 />
@@ -168,6 +182,7 @@ class Navigation extends Component {
                       {...props}
                       getCurrentUrl={this.getCurrentUrl}
                       handlePreferredClickedProps={this.handlePreferredClickedProps}
+                      collapseHamburgerMenu={this.collapseHamburgerMenu}
                     />
                   )}
                 />
@@ -207,6 +222,7 @@ class Navigation extends Component {
                       {...props}
                       getCurrentUrl={this.getCurrentUrl}
                       handleExploreClickedProps={this.handleExploreClickedProps}
+                      collapseHamburgerMenu={this.collapseHamburgerMenu}
                     />
                   )}
                 />
@@ -226,9 +242,9 @@ class Navigation extends Component {
                 </NavLink>
               </div>
             </div>
-          </Router>
+          </div>
         </div>
-      </div>
+      </Router>
     );
   }
 }

@@ -10,6 +10,7 @@ class Preferred extends Component {
   componentWillMount() {
     this.props.getCurrentUrl();
     this.props.fetchPreferedFromAPI(this.props.hotel);
+    this.props.collapseHamburgerMenu();
   }
 
   // handleClick = item => {

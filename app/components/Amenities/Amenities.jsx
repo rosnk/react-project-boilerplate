@@ -11,6 +11,7 @@ class Amenities extends Component {
   componentWillMount() {
     this.props.getCurrentUrl();
     this.props.fetchAmenitiesFromAPI(this.props.hotel);
+    this.props.collapseHamburgerMenu();
   }
 
   handleClick = item => {

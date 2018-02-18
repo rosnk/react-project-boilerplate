@@ -8,6 +8,7 @@ class Explore extends Component {
   componentWillMount() {
     this.props.getCurrentUrl();
     this.props.fetchExploreAdsFromAPI(this.props.hotel, this.props.location);
+    this.props.collapseHamburgerMenu();
   }
 
   handleClick = category => {

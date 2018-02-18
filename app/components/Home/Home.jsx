@@ -9,6 +9,7 @@ import Slider from '../Slider/Slider';
 class Home extends Component {
   componentWillMount() {
     this.props.getCurrentUrl();
+    this.props.collapseHamburgerMenu();
   }
 
   render() {
