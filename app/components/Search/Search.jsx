@@ -76,10 +76,32 @@ class Search extends Component {
     this.props.history.goBack();
   };
 
+  addSearchResultPadding = () => {
+    const searchResult = document.getElementsByClassName('hotel_search_results')[0];
+    searchResult.style.paddingTop = '250px';
+  };
+
+  removeSearchResultPadding = () => {
+    const searchResult = document.getElementsByClassName('hotel_search_results')[0];
+    searchResult.style.paddingTop = '20px';
+  };
+
   render() {
     const inputProps = {
       value: this.state.address,
       onChange: this.onChange,
+      onMouseLeave: () => {
+        this.removeSearchResultPadding();
+      },
+      onBlur: () => {
+        this.removeSearchResultPadding();
+      },
+      onKeyDown: e => {
+        this.addSearchResultPadding();
+        if (e.keyCode === 27) {
+          this.removeSearchResultPadding();
+        }
+      },
       placeholder: 'Search for Hotels & Resorts by Location'
     };
 
