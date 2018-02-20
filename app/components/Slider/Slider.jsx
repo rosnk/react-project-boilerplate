@@ -11,9 +11,14 @@ const Slider = props => (
     </ol>
     <div className="carousel-inner">
       {props.sliders.map((slider, index) => (
-        <div className={index === 0 ? 'carousel-item active' : 'carousel-item'} key={slider.id}>
-          <img className="d-block w-100" src={slider.image} alt="" />
-        </div>
+        <div className={index === 0 ? 'carousel-item active' : 'carousel-item'} key={slider.id} style={{
+          backgroundImage: `url(${slider.image})`,
+          backgroundSize: 'cover', 
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed'
+        }} />
+         
+        
       ))}
     </div>
     <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
