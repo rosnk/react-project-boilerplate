@@ -1,6 +1,7 @@
 /* eslint react/prop-types: 0 */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Loader from '../common/Loader/Loader';
 // import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './css/preferred.scss';
 import { fetchPreferedFromAPI } from '../../actions/hotelActions';
@@ -24,9 +25,10 @@ class Preferred extends Component {
   };
 
   render() {
-    console.log(this.props.preferred);
-    return (
-      <div className="preferred">
+    let content = <Loader />;
+      if (!this.props.showLoader) {
+        content = (
+          <div className="preferred">
         {this.props.preferred.map(item => (
           <div role="presentation" className="card" key={item.id} onClick={() => this.handleClick(item)}>
             <div className="row">
@@ -46,7 +48,9 @@ class Preferred extends Component {
           </div>
         ))}
       </div>
-    );
+    )}
+    
+    return content;
   }
 }
 
@@ -55,7 +59,8 @@ function mapStateToProps(state) {
 
   return {
     hotel: state.hotel.hotel,
-    preferred: state.hotel.preferred
+    preferred: state.hotel.preferred,
+    showLoader: state.hotel.showLoader
   };
 }
 

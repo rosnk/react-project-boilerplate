@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './css/explore.scss';
+import Loader from '../common/Loader/Loader';
 import { fetchExploreAdsFromAPI } from '../../actions/hotelActions';
 
 class Explore extends Component {
@@ -27,8 +28,11 @@ class Explore extends Component {
   };
 
   render() {
-    return (
-      <div className="explore">
+    let content = <Loader />;
+
+    if (!this.props.showLoader) {
+      content = (
+        <div className="explore">
         {this.props.exploreCategories.map(category => (
           <div
             role="presentation"
@@ -43,7 +47,10 @@ class Explore extends Component {
           </div>
         ))}
       </div>
-    );
+      );
+    }
+    
+    return content;
   }
 }
 
@@ -54,13 +61,15 @@ function mapStateToProps(state) {
     hotel: state.hotel.hotel,
     location: state.hotel.currentLocation,
     exploreAdvertisements: state.hotel.exploreAdvertisements,
-    exploreCategories: state.hotel.exploreCategories
+    exploreCategories: state.hotel.exploreCategories,
+    showLoader: state.hotel.showLoader
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     fetchExploreAdsFromAPI: (hotel, location) => dispatch(fetchExploreAdsFromAPI(hotel, location))
+    
   };
 }
 

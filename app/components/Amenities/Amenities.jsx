@@ -1,7 +1,7 @@
 /* eslint react/prop-types: 0 */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import Loader from '../common/Loader/Loader';
 // import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './css/amenities.scss';
 import { fetchAmenitiesFromAPI } from '../../actions/hotelActions';
@@ -20,7 +20,9 @@ class Amenities extends Component {
   };
 
   render() {
-    return (
+    let content = <Loader />;
+      if (!this.props.showLoader) {
+        content = (
       <div className="amenities">
         {this.props.amenities.map(item => (
           <div role="presentation" onClick={() => this.handleClick(item)} className="amenity_wrapper" key={item.id}>
@@ -31,8 +33,10 @@ class Amenities extends Component {
             <p>{item.title}</p>
           </div>
         ))}
-      </div>
-    );
+      </div>)}
+
+    return content;
+    
   }
 }
 
@@ -41,7 +45,8 @@ function mapStateToProps(state) {
 
   return {
     hotel: state.hotel.hotel,
-    amenities: state.hotel.amenities
+    amenities: state.hotel.amenities,
+    showLoader: state.hotel.showLoader
   };
 }
 

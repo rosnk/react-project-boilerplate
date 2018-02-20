@@ -88,12 +88,14 @@ function hotelReducer(state = initialState, action) {
     case types.FETCHING_AMENITIES:
       return {
         ...state,
+        showLoader: true,
         isFetchingAmenities: true,
         amenities: []
       };
     case types.FETCHING_AMENITIES_SUCCESS:
       return {
         ...state,
+        showLoader: false,
         isFetchingAmenities: false,
         amenities: action.data
       };
@@ -107,12 +109,14 @@ function hotelReducer(state = initialState, action) {
     case types.FETCHING_PREFERRED:
       return {
         ...state,
+        showLoader: true,
         isFetchingExplore: true,
         preferred: []
       };
     case types.FETCHING_PREFERRED_SUCCESS:
       return {
         ...state,
+        showLoader: false,
         isFetchingExplore: false,
         preferred: action.data
       };
@@ -126,12 +130,14 @@ function hotelReducer(state = initialState, action) {
     case types.FETCHING_EXPLORE:
       return {
         ...state,
+        showLoader: true,
         isFetchingPreferred: true,
         explore: []
       };
     case types.FETCHING_EXPLORE_SUCCESS:
       return {
         ...state,
+        showLoader: false,
         isFetchingPreferred: false,
         exploreCategories: action.data.categories,
         exploreAdvertisements: action.data.advertisements
@@ -139,6 +145,7 @@ function hotelReducer(state = initialState, action) {
     case types.FETCHING_EXPLORE_FAILURE:
       return {
         ...state,
+        showLoader: false,
         isFetchingPreferred: false,
         errorPreferred: true
       };
