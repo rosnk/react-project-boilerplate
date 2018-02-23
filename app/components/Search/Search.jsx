@@ -1,6 +1,6 @@
 /* eslint react/prop-types: 0 */
 import React, { Component } from 'react';
-import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import PlacesAutocomplete from 'react-places-autocomplete';
 import { connect } from 'react-redux';
 import { Container, Row, Col } from 'reactstrap';
 import './css/Search.scss';
@@ -20,27 +20,40 @@ class Search extends Component {
     this.state = {
       address: ''
     };
-    this.onChange = address => {
-      this.setState({ address });
-      if (address.length >= 3) {
-        this.props.searchHotelsFromKeyword(address);
-      }
-
-      geocodeByAddress(this.state.address)
-        .then(results => getLatLng(results[0]))
-        .then(latLng => {
-          const location = {
-            latitude: latLng.lat,
-            longitude: latLng.lng
-          };
-
-          this.props.setCurrentLocation(location);
-          this.props.searchHotelsFromAPI(location);
-        })
-
-        .catch(error => console.error('Error', error));
-    };
+    this.onChange = this.onChange;
   }
+
+  componentDidMount() {
+    const input = document.getElementById('search_field');
+    input.focus();
+    input.select();
+  }
+
+  onChange = address => {
+    this.setState({ address });
+
+    if (address.length > 3) {
+      this.props.searchHotelsFromKeyword(address);
+
+      // geocodeByAddress(this.state.address)
+      //   .then(results => getLatLng(results[0]))
+      //   .then(latLng => {
+      //     const location = {
+      //       latitude: latLng.lat,
+      //       longitude: latLng.lng
+      //     };
+
+      //     this.props.setCurrentLocation(location);
+      //     this.props.searchHotelsFromAPI(location);
+      //   })
+
+      //   .catch(error => console.error('Error', error));
+    }
+
+    if (address.length <= 3) {
+      this.removeSearchResultPadding();
+    }
+  };
 
   // handleFormSubmit = event => {
   //   alert('hellow');
@@ -76,9 +89,9 @@ class Search extends Component {
     this.props.history.goBack();
   };
 
-  addSearchResultPadding = () => {
+  addSearchResultPadding = paddingTopSize => {
     const searchResult = document.getElementsByClassName('hotel_search_results')[0];
-    searchResult.style.paddingTop = '250px';
+    searchResult.style.paddingTop = `${paddingTopSize + 20}px`;
   };
 
   removeSearchResultPadding = () => {
@@ -87,17 +100,29 @@ class Search extends Component {
   };
 
   render() {
+    let PlacesAutocompleteDivHeight = document.getElementById('PlacesAutocomplete__autocomplete-container');
+
+    if (PlacesAutocompleteDivHeight) {
+      PlacesAutocompleteDivHeight = PlacesAutocompleteDivHeight.clientHeight;
+      this.addSearchResultPadding(PlacesAutocompleteDivHeight);
+    }
+
     const inputProps = {
       value: this.state.address,
+      id: 'search_field',
       onChange: this.onChange,
-      onMouseLeave: () => {
-        this.removeSearchResultPadding();
-      },
+      // onMouseLeave: () => {
+      //   this.removeSearchResultPadding();
+      // },
+
       onBlur: () => {
         this.removeSearchResultPadding();
       },
       onKeyDown: e => {
-        this.addSearchResultPadding();
+        // const PlacesAutocompleteDivHeight = document.getElementById('PlacesAutocomplete__autocomplete-container')
+        //   .clientHeight;
+
+        // this.addSearchResultPadding(PlacesAutocompleteDivHeight);
         if (e.keyCode === 27) {
           this.removeSearchResultPadding();
         }
@@ -119,6 +144,7 @@ class Search extends Component {
       <div className="search">
         <div className="header text-center">
           <h3>Search</h3>
+
           <i className="fa fa-times fa-2x" onClick={this.handeSearchClose} aria-hidden="true" />
         </div>
         <div className="container">
@@ -127,7 +153,6 @@ class Search extends Component {
               <PlacesAutocomplete inputProps={inputProps} />
             </form>
           </div>
-          {/* this.state.location != {} ? <HotelsNearList location={this.state.location} /> : null */}
 
           <div className="hotel_search_results">
             <Container>
@@ -175,5 +200,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);
-
-// export default Search;

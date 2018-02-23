@@ -1,4 +1,5 @@
 // import axios from 'axios';
+import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import types from '../constants/actionTypes';
 import hotelapi from '../api/hotelApi';
 
@@ -46,7 +47,22 @@ export function searchHotelsFromAPI(location) {
 export function searchHotelsFromKeyword(address) {
   return dispatch => {
     function success(data) {
-      dispatch({ type: types.FETCHING_SEACH_RESULT_BY_KEYWORD_HOTEL_SUCCESS, data });
+      if (data.length <= 0) {
+        geocodeByAddress(address)
+          .then(results => getLatLng(results[0]))
+          .then(latLng => {
+            const location = {
+              latitude: latLng.lat,
+              longitude: latLng.lng
+            };
+            dispatch(setCurrentLocation(location));
+            dispatch(searchHotelsFromAPI(location));
+          })
+
+          .catch(error => console.error('Error', error));
+      } else {
+        dispatch({ type: types.FETCHING_SEACH_RESULT_BY_KEYWORD_HOTEL_SUCCESS, data });
+      }
     }
 
     function failure() {

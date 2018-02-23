@@ -47,8 +47,6 @@ const api = {
   },
 
   searchHotelsFromAPI: function searchHotelsFromAPI(location, success, failure) {
-    // debugger // eslint-disable-line
-
     axios
       .get(`https://staycompass.com/hotels?lat= ${location.latitude}&lng=${location.longitude}`)
       .then(response => {
