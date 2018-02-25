@@ -17,6 +17,16 @@
   }
 }
 
+.amenity-detail,
+.preferred-detail,
+.expo-detail-list-item {
+  .carousel-item {
+    height: 0;
+    padding: 0;
+    padding-bottom: 75%;
+  }
+}
+
 @media (min-width: 30em) {
 }
 
@@ -24,4 +34,13 @@
 }
 
 @media (min-width: 62em) {
+  .amenity-detail,
+  .preferred-detail,
+  .expo-detail-list-item {
+    .carousel-item {
+      height: 0;
+      padding: 0;
+      padding-bottom: 50%;
+    }
+  }
 }

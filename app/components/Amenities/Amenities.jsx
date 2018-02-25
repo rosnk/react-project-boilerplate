@@ -20,23 +20,34 @@ class Amenities extends Component {
   };
 
   render() {
+    function uniqueId() {
+      function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+          .toString(16)
+          .substring(1);
+      }
+
+      return `${s4()}-${s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;
+    }
+
     let content = <Loader />;
-      if (!this.props.showLoader) {
-        content = (
-      <div className="amenities">
-        {this.props.amenities.map(item => (
-          <div role="presentation" onClick={() => this.handleClick(item)} className="amenity_wrapper" key={item.id}>
-            {console.log(item)}
-            <div className="image_wrapper">
-              <img src={item.cover_image} className="img-fluid" alt="" />
+    if (!this.props.showLoader) {
+      content = (
+        <div className="amenities">
+          {this.props.amenities.map(item => (
+            <div role="presentation" onClick={() => this.handleClick(item)} className="amenity_wrapper" key={uniqueId}>
+              {console.log(item)}
+              <div className="image_wrapper">
+                <img src={item.cover_image} className="img-fluid" alt="" />
+              </div>
+              <p>{item.title}</p>
             </div>
-            <p>{item.title}</p>
-          </div>
-        ))}
-      </div>)}
+          ))}
+        </div>
+      );
+    }
 
     return content;
-    
   }
 }
 

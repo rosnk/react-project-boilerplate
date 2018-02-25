@@ -36,6 +36,7 @@
     "react": "preact-compat/react",
     "react-addons-perf": "^15.4.2",
     "react-dom": "preact-compat/react-dom",
+    "react-native-listener": "^1.0.2",
     "react-places-autocomplete": "^6.0.2",
     "react-redux": "^5.0.6",
     "react-render-html": "^0.6.0",

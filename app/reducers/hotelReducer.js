@@ -79,6 +79,11 @@ function hotelReducer(state = initialState, action) {
         isFetching: false,
         error: true
       };
+    case types.CLEAR_HOTELS_BEFORE_SEARCH:
+      return {
+        ...state,
+        hotels: []
+      };
     case types.SET_HOTEL:
       return {
         ...state,

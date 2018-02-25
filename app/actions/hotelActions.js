@@ -26,6 +26,12 @@ export function fetchHotelFromAPI(location) {
   };
 }
 
+export function clearHotelsBeforeSearch() {
+  return dispatch => {
+    dispatch({ type: types.CLEAR_HOTELS_BEFORE_SEARCH });
+  };
+}
+
 /* search page */
 
 export function searchHotelsFromAPI(location) {

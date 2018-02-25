@@ -21,9 +21,16 @@ const TabSlider = props => (
     </ol>
     <div className="carousel-inner">
       {props.sliders.map((slider, index) => (
-        <div className={index === 0 ? 'carousel-item active' : 'carousel-item'} key={uniqueId()}>
-          <img className="d-block w-100" src={slider} alt="" />
-        </div>
+        <div
+          className={index === 0 ? 'carousel-item active' : 'carousel-item'}
+          key={uniqueId()}
+          style={{
+            backgroundImage: `url(${slider})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center center',
+            backgroundRepeat: 'no-repeat'
+          }}
+        />
       ))}
     </div>
     <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

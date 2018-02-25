@@ -9,7 +9,8 @@ import {
   searchHotelsFromAPI,
   searchHotelsFromKeyword,
   setHotel,
-  fetchAmenitiesFromAPI
+  fetchAmenitiesFromAPI,
+  clearHotelsBeforeSearch
 } from '../../actions/hotelActions';
 import NoImage from './images/no-image.jpg';
 // import HotelsNearList from '../HotelsNearList/HotelsNearList';
@@ -21,6 +22,10 @@ class Search extends Component {
       address: ''
     };
     this.onChange = this.onChange;
+  }
+
+  componentWillMount() {
+    this.props.clearHotelsBeforeSearch();
   }
 
   componentDidMount() {
@@ -91,7 +96,7 @@ class Search extends Component {
 
   addSearchResultPadding = paddingTopSize => {
     const searchResult = document.getElementsByClassName('hotel_search_results')[0];
-    searchResult.style.paddingTop = `${paddingTopSize + 20}px`;
+    searchResult.style.paddingTop = `${paddingTopSize + 70}px`;
   };
 
   removeSearchResultPadding = () => {
@@ -111,18 +116,10 @@ class Search extends Component {
       value: this.state.address,
       id: 'search_field',
       onChange: this.onChange,
-      // onMouseLeave: () => {
-      //   this.removeSearchResultPadding();
-      // },
-
       onBlur: () => {
         this.removeSearchResultPadding();
       },
       onKeyDown: e => {
-        // const PlacesAutocompleteDivHeight = document.getElementById('PlacesAutocomplete__autocomplete-container')
-        //   .clientHeight;
-
-        // this.addSearchResultPadding(PlacesAutocompleteDivHeight);
         if (e.keyCode === 27) {
           this.removeSearchResultPadding();
         }
@@ -138,6 +135,16 @@ class Search extends Component {
         image = <img src={img} alt="" className="img-thumbnail" />;
       }
       return image;
+    }
+
+    function uniqueId() {
+      function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+          .toString(16)
+          .substring(1);
+      }
+
+      return `${s4()}-${s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;
     }
 
     return (
@@ -157,7 +164,7 @@ class Search extends Component {
           <div className="hotel_search_results">
             <Container>
               {this.props.hotels.map(item => (
-                <Row onClick={() => this.handleRowClick(item)}>
+                <Row onClick={() => this.handleRowClick(item)} key={uniqueId()}>
                   <Col xs="4">
                     <div className="img_wrapper text-center">{renderImg(item.logo_small_url)}</div>
                   </Col>
@@ -192,7 +199,8 @@ function mapDispatchToProps(dispatch) {
     searchHotelsFromKeyword: address => dispatch(searchHotelsFromKeyword(address)),
     setHotel: hotel => dispatch(setHotel(hotel)),
     getAmenities: hotel => dispatch(fetchAmenitiesFromAPI(hotel)),
-    setCurrentLocation: location => dispatch(setCurrentLocation(location))
+    setCurrentLocation: location => dispatch(setCurrentLocation(location)),
+    clearHotelsBeforeSearch: () => dispatch(clearHotelsBeforeSearch())
 
     // fetchHotelFromAPI: location => dispatch(fetchHotelFromAPI(location))
     // hideHotelSearch: () => dispatch(hideHotelSearch())

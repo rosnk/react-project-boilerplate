@@ -4,6 +4,7 @@ import './css/slider.scss';
 
 const Slider = props => (
   <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
+    {console.log(props)}
     <ol className="carousel-indicators">
       {props.sliders.map((slider, index) => (
         <li data-target="#carouselExampleIndicators" data-slide-to={index} className={index === 0 ? 'active' : ''} />
@@ -11,14 +12,16 @@ const Slider = props => (
     </ol>
     <div className="carousel-inner">
       {props.sliders.map((slider, index) => (
-        <div className={index === 0 ? 'carousel-item active' : 'carousel-item'} key={slider.id} style={{
-          backgroundImage: `url(${slider.image})`,
-          backgroundSize: 'cover', 
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed'
-        }} />
-         
-        
+        <div
+          className={index === 0 ? 'carousel-item active' : 'carousel-item'}
+          key={slider.id}
+          style={{
+            backgroundImage: `url(${slider.image})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center center',
+            backgroundRepeat: 'no-repeat'
+          }}
+        />
       ))}
     </div>
     <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
