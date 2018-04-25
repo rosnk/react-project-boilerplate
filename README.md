@@ -1,4 +1,3 @@
-# StayCompass Mobile version for web
+# React Boilerplate with webpack for starting new project
 
-This code is clone of mobile app for webversion. 
-
+Clone and Run yarn install to start the project. This boilerplate is ready to start react-redux project.  
