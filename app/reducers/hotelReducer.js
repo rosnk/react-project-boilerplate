@@ -154,24 +154,6 @@ function hotelReducer(state = initialState, action) {
         isFetchingPreferred: false,
         errorPreferred: true
       };
-    // case types.FETCHING_HOTEL_NEAR:
-    //     return {
-    //         ...state,
-    //         isFetchingHotels: true,
-    //         hotels: []
-    //     };
-    // case types.FETCHING_HOTEL_NEAR_SUCCESS:
-    //     return {
-    //         ...state,
-    //         isFetchingHotels: false,
-    //         hotels: action.data
-    //     };
-    // case types.FETCHING_HOTEL_NEAR_FAILURE:
-    //     return {
-    //         ...state,
-    //         isFetchingHotels: false,
-    //         errorHotels: true
-    //     };
 
     default:
       return state;
